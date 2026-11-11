@@ -4,12 +4,12 @@ jobs:
   sondar:
     runs-on: ubuntu-latest
     steps:
-      - name: Abrir o link do artifact
+      - name: Ler arquivos publicados
         run: |
-          U="https://claude.ai/artifact/QZFC3qJEpP2kDVktxdPvFC"
-          curl -sSL -A "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36" -D h.txt -o p.html -w "status=%{http_code} final=%{url_effective}\n" "$U" || true
-          echo "--- headers"; head -40 h.txt || true
-          echo "--- tamanho"; wc -c p.html || true
-          echo "--- urls"; grep -oE 'https?://[^"'"'"' <>]+' p.html | sort -u | head -80 || true
-          echo "--- iframes"; grep -oE '<iframe[^>]*>' p.html | head || true
-          echo "--- inicio"; head -c 3000 p.html || true
+          H="https://bec2bc2a-8efe-4c9d-ae4f-cb32a401e0fb.frame.claudeusercontent.com"
+          A="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36"
+          for p in /coupons.json / /index.html; do
+            echo "===== $p"
+            curl -sS -A "$A" -H "Referer: https://claude.ai/" -D - -o b.txt -w "status=%{http_code} type=%{content_type} final=%{url_effective}\n" "$H$p" | grep -iE '^(HTTP|status=|content-type|location|cache-control|access-control)' || true
+            head -c 400 b.txt; echo
+          done
