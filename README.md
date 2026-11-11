@@ -1,10 +1,8 @@
 # Cupom do Dia
 
-Site estático com cupons de desconto e frete grátis de AliExpress, Mercado Livre, Shopee e Amazon.
+Porta de entrada do site Cupom do Dia na Netlify.
 
-- `index.html`: a página. Ela lê `coupons.json` ao abrir.
-- Cupons: a lista oficial fica em `coupons.json` no ramo **dados**. Uma tarefa agendada do Claude atualiza esse ramo a cada 3 horas. A página lê o arquivo direto do GitHub, então atualizar os cupons não gera deploy na Netlify (cada deploy gasta créditos do plano grátis).
-- `coupons.json` (neste ramo main): cópia de reserva, usada só se o GitHub não responder.
-- `icons/`: ícone do site (favicon e ícone da Tela de Início do iPhone/Android).
-
-Não precisa de build: na Netlify, deixe o comando de build vazio e a pasta de publicação como a raiz (`/`).
+- `index.html`: página com o ícone do site e o botão "Ver cupons de hoje". Quando aberta pelo ícone da Tela de Início, vai direto para os cupons.
+- Os cupons ficam em https://claude.ai/artifact/QZFC3qJEpP2kDVktxdPvFC, atualizado a cada 3 horas por uma tarefa agendada do Claude. Esta página não precisa mudar quando os cupons mudam, então não gasta deploys da Netlify.
+- `icons/`: favicon e ícone da Tela de Início (iPhone e Android).
+- Ramo `dados`: lista antiga de cupons, não é mais usada.
