@@ -161,7 +161,9 @@ document.addEventListener("click",e=>{
     try{navigator.clipboard.writeText(code).then(ok,fb)}catch(_){fb()}}
 });
 $("#q").addEventListener("input",e=>{q=e.target.value;render()});
-fetch("coupons.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(j=>{
+const DADOS="https://raw.githubusercontent.com/caldaragustavo/cupom-do-dia/dados/coupons.json?v="+Math.floor(Date.now()/600000);
+const getJson=u=>fetch(u,{cache:"no-store"}).then(r=>{if(!r.ok)throw 0;return r.json()});
+getJson(DADOS).catch(()=>getJson("coupons.json")).then(j=>{
   data=(j.cupons||[]).filter(c=>STORES[c.loja]);
   const d=new Date(j.atualizado);
   $("#upd").textContent=isNaN(d)?"Atualizado hoje":"Atualizado "+d.toLocaleDateString("pt-BR",{day:"2-digit",month:"short"})+", "+d.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});

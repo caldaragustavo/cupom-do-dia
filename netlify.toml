@@ -1,0 +1,5 @@
+# O site não tem build. Os cupons ficam no ramo "dados" e são lidos direto do GitHub,
+# então mudanças que mexem só em coupons.json não geram deploy (economiza créditos).
+[build]
+  publish = "."
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)coupons.json'"
