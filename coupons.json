@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-11T06:55:56-03:00",
+ "atualizado": "2026-11-11T12:15:56-03:00",
  "cupons": [
   {
    "id": "aliexpress-1",
@@ -16,6 +16,18 @@
   {
    "id": "aliexpress-2",
    "loja": "aliexpress",
+   "codigo": "AFFNOV01",
+   "titulo": "R$ 16 de desconto",
+   "regra": "Compras a partir de R$ 80 (cupom do 11.11). Confira no carrinho: a AliExpress pode encerrar o código sem aviso.",
+   "tipo": "desconto",
+   "valor": "R$16",
+   "validade": "enquanto durar",
+   "fonte": "Cupom Online",
+   "verificado": "2026-11-11"
+  },
+  {
+   "id": "aliexpress-3",
+   "loja": "aliexpress",
    "codigo": "Cuponomia1",
    "titulo": "R$ 18 de desconto",
    "regra": "Compras a partir de R$ 90. Código exclusivo Cuponomia. Confira no carrinho: a AliExpress pode encerrar o código sem aviso.",
@@ -26,7 +38,7 @@
    "verificado": "2026-11-11"
   },
   {
-   "id": "aliexpress-3",
+   "id": "aliexpress-4",
    "loja": "aliexpress",
    "codigo": "AEMEGA2",
    "titulo": "R$ 32 de desconto",
@@ -38,7 +50,7 @@
    "verificado": "2026-11-11"
   },
   {
-   "id": "aliexpress-4",
+   "id": "aliexpress-5",
    "loja": "aliexpress",
    "codigo": "Cuponomia2",
    "titulo": "R$ 35 de desconto",
@@ -50,7 +62,7 @@
    "verificado": "2026-11-11"
   },
   {
-   "id": "aliexpress-5",
+   "id": "aliexpress-6",
    "loja": "aliexpress",
    "codigo": "WOBR07",
    "titulo": "R$ 35 de desconto",
@@ -62,7 +74,7 @@
    "verificado": "2026-11-11"
   },
   {
-   "id": "aliexpress-6",
+   "id": "aliexpress-7",
    "loja": "aliexpress",
    "codigo": "AEMEGA3",
    "titulo": "R$ 50 de desconto",
@@ -74,37 +86,25 @@
    "verificado": "2026-11-11"
   },
   {
-   "id": "aliexpress-7",
+   "id": "aliexpress-8",
    "loja": "aliexpress",
    "codigo": "AFFNOV03",
    "titulo": "R$ 50 de desconto",
    "regra": "Compras a partir de R$ 290 (cupom do 11.11). Confira no carrinho: a AliExpress pode encerrar o código sem aviso.",
    "tipo": "desconto",
    "valor": "R$50",
-   "validade": "até 16/11",
+   "validade": "até 17/11",
    "fonte": "Cuponomia / Cupom Online",
    "verificado": "2026-11-11"
   },
   {
-   "id": "aliexpress-8",
+   "id": "aliexpress-9",
    "loja": "aliexpress",
    "codigo": "Cuponomia3",
    "titulo": "R$ 65 de desconto",
    "regra": "Compras a partir de R$ 430. Confira no carrinho: a AliExpress pode encerrar o código sem aviso.",
    "tipo": "desconto",
    "valor": "R$65",
-   "validade": "enquanto durar",
-   "fonte": "Cuponomia",
-   "verificado": "2026-11-11"
-  },
-  {
-   "id": "aliexpress-9",
-   "loja": "aliexpress",
-   "codigo": "BDBR10",
-   "titulo": "R$ 56 de desconto",
-   "regra": "Compras a partir de R$ 555. Confira no carrinho: a AliExpress pode encerrar o código sem aviso.",
-   "tipo": "desconto",
-   "valor": "R$56",
    "validade": "enquanto durar",
    "fonte": "Cuponomia",
    "verificado": "2026-11-11"
@@ -129,8 +129,8 @@
    "regra": "Compras a partir de R$ 720 (cupom do 11.11). Confira no carrinho: a AliExpress pode encerrar o código sem aviso.",
    "tipo": "desconto",
    "valor": "R$120",
-   "validade": "enquanto durar",
-   "fonte": "Cuponomia",
+   "validade": "até 17/11",
+   "fonte": "Cuponomia / Cupom Online",
    "verificado": "2026-11-11"
   },
   {
@@ -364,11 +364,11 @@
   {
    "id": "shopee-7",
    "loja": "shopee",
-   "codigo": "CUP0N0M1A2005PB",
-   "titulo": "R$ 10 de desconto",
-   "regra": "Compras acima de R$ 70 (o código usa números no lugar de letras)",
+   "codigo": "CUP0N0M1A1111PB",
+   "titulo": "R$ 30 de desconto",
+   "regra": "Compras acima de R$ 100; código exclusivo (usa números no lugar de letras).",
    "tipo": "desconto",
-   "valor": "R$10",
+   "valor": "R$30",
    "validade": "enquanto durar",
    "fonte": "Cuponomia",
    "verificado": "2026-11-11"
