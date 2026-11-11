@@ -1,0 +1,15 @@
+name: teste-leitura-artifact
+on: [push, workflow_dispatch]
+jobs:
+  sondar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Abrir o link do artifact
+        run: |
+          U="https://claude.ai/artifact/QZFC3qJEpP2kDVktxdPvFC"
+          curl -sSL -A "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36" -D h.txt -o p.html -w "status=%{http_code} final=%{url_effective}\n" "$U" || true
+          echo "--- headers"; head -40 h.txt || true
+          echo "--- tamanho"; wc -c p.html || true
+          echo "--- urls"; grep -oE 'https?://[^"'"'"' <>]+' p.html | sort -u | head -80 || true
+          echo "--- iframes"; grep -oE '<iframe[^>]*>' p.html | head || true
+          echo "--- inicio"; head -c 3000 p.html || true
