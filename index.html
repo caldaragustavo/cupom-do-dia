@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Cupons de desconto e frete grátis de AliExpress, Mercado Livre, Shopee e Amazon, atualizados todo dia e prontos para copiar.">
+<meta name="theme-color" content="#eef0ea" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#12151d" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="icons/icone.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="Cupom do Dia">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest">
+<meta property="og:title" content="Cupom do Dia">
+<meta property="og:description" content="Cupons de AliExpress, Mercado Livre, Shopee e Amazon atualizados todo dia.">
+<meta property="og:image" content="icons/icon-512.png">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Cupom do Dia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: masthead + store tabs, then a grid of tear-off coupon tickets (value stub | details + code) */
+:root{
+  --bg:#eef0ea; --paper:#fbfcf8; --ink:#1b2130; --muted:#5d6577; --line:#d5d9cf;
+  --accent:#2f3fa0; --stamp:#c23a2b; --ok:#1f7a4a; --chip:#e3e6dd;
+  --ali:#e43d1b; --ml:#d9b800; --shp:#ee4d2d; --amz:#e88a00;
+  --f-display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12151d; --paper:#1b2030; --ink:#e8eaf1; --muted:#9aa1b4; --line:#2e3547;
+  --accent:#8f9cff; --stamp:#ff7a66; --ok:#5fd394; --chip:#262c3d;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12151d; --paper:#1b2030; --ink:#e8eaf1; --muted:#9aa1b4; --line:#2e3547;
+  --accent:#8f9cff; --stamp:#ff7a66; --ok:#5fd394; --chip:#262c3d;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:16px;padding-block:28px 56px;display:flex;flex-direction:column;gap:22px}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px 24px}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(2rem,6vw,3.2rem);line-height:1;margin:0;letter-spacing:-.02em;text-wrap:balance}
+h1 span{color:var(--stamp)}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:clamp(48px,11vw,64px);height:auto;flex:0 0 auto;border-radius:22%;box-shadow:0 0 0 1px var(--line)}
+.sub{margin:6px 0 0;color:var(--muted);max-width:60ch}
+.stamp{font-family:var(--f-mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;border:1.5px dashed var(--stamp);color:var(--stamp);padding:6px 10px;border-radius:4px;transform:rotate(-2deg);white-space:nowrap}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.tab{flex:0 0 auto;display:flex;align-items:center;gap:8px;font:600 .92rem var(--f-body);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}
+.tab .dot{width:10px;height:10px;border-radius:50%;background:var(--muted)}
+.tab .n{font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tab[aria-selected="true"] .n{color:inherit;opacity:.7}
+.tab:focus-visible,.chip:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{font:500 .85rem var(--f-body);background:var(--chip);color:var(--ink);border:0;border-radius:6px;padding:6px 12px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--paper)}
+.search{flex:1 1 200px;min-width:0;font:inherit;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:7px 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:14px}
+.store-h{grid-column:1/-1;display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:800;font-size:1.3rem;margin-top:10px}
+.store-h .dot{width:12px;height:12px;border-radius:50%}
+.ticket{position:relative;display:grid;grid-template-columns:96px 1fr;background:var(--paper);border:1px solid var(--line);border-radius:10px;min-width:0;
+  -webkit-mask:radial-gradient(circle 9px at 96px 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 9px at 96px 100%,#0000 98%,#000) bottom/100% 51% no-repeat;
+  mask:radial-gradient(circle 9px at 96px 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 9px at 96px 100%,#0000 98%,#000) bottom/100% 51% no-repeat}
+.stub{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;padding:14px 6px;border-right:2px dashed var(--line);text-align:center}
+.val{font-family:var(--f-display);font-weight:800;font-size:1.55rem;line-height:1;letter-spacing:-.02em;color:var(--stamp)}
+.val.frete{color:var(--ok);font-size:1.15rem}
+.lbl{font-family:var(--f-mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.body{padding:12px 14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.meta{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.meta .dot{width:8px;height:8px;border-radius:50%}
+.t{font-weight:600;font-size:1rem;line-height:1.3;margin:0}
+.r{color:var(--muted);font-size:.88rem;margin:0}
+.code{display:flex;gap:6px;align-items:stretch;margin-top:2px}
+.code output{flex:1;min-width:0;overflow-x:auto;white-space:nowrap;font-family:var(--f-mono);font-weight:700;font-size:.95rem;letter-spacing:.04em;background:var(--chip);border:1.5px dashed var(--muted);border-radius:6px;padding:6px 10px;user-select:all}
+.copy{font:600 .85rem var(--f-body);background:var(--ink);color:var(--paper);border:0;border-radius:6px;padding:0 14px;cursor:pointer;white-space:nowrap}
+.copy.done{background:var(--ok)}
+.nocode{font-size:.8rem;color:var(--ok);font-weight:600}
+.foot{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:.72rem;color:var(--muted)}
+.empty{grid-column:1/-1;background:var(--paper);border:1px dashed var(--line);border-radius:10px;padding:28px;text-align:center;color:var(--muted)}
+.note{font-size:.82rem;color:var(--muted);max-width:75ch;margin:0}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:8px;font-weight:600;font-size:.9rem}
+@media (prefers-reduced-motion:no-preference){.ticket{transition:transform .15s}.ticket:hover{transform:translateY(-2px)}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div>
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="#1b2130"/><g transform="rotate(-12 256 256)"><path fill="#fbfcf8" d="M96 156h320a20 20 0 0 1 20 20v52a28 28 0 0 0 0 56v52a20 20 0 0 1-20 20H96a20 20 0 0 1-20-20v-52a28 28 0 0 0 0-56v-52a20 20 0 0 1 20-20z"/><line x1="186" y1="176" x2="186" y2="336" stroke="#c4c9bd" stroke-width="8" stroke-linecap="round" stroke-dasharray="2 20"/><g fill="#c23a2b"><circle cx="270" cy="210" r="30"/><circle cx="366" cy="302" r="30"/><rect x="306" y="166" width="22" height="180" rx="11" transform="rotate(38 318 256)"/></g><circle cx="270" cy="210" r="12" fill="#fbfcf8"/><circle cx="366" cy="302" r="12" fill="#fbfcf8"/><rect x="114" y="226" width="44" height="12" rx="6" fill="#2f3fa0"/><rect x="114" y="250" width="30" height="12" rx="6" fill="#2f3fa0" opacity=".55"/></g></svg>
+        <h1>Cupom <span>do Dia</span></h1>
+      </div>
+      <p class="sub">Códigos de desconto e frete grátis para AliExpress, Mercado Livre, Shopee e Amazon. Toque em Copiar e cole no carrinho.</p>
+    </div>
+    <div class="stamp" id="upd">Carregando…</div>
+  </header>
+
+  <nav class="tabs" role="tablist" id="tabs" aria-label="Lojas"></nav>
+
+  <div class="tools">
+    <button class="chip" id="f-todos" aria-pressed="true" data-f="todos">Tudo</button>
+    <button class="chip" id="f-desc" aria-pressed="false" data-f="desconto">Descontos</button>
+    <button class="chip" id="f-frete" aria-pressed="false" data-f="frete">Frete grátis</button>
+    <input class="search" id="q" type="search" placeholder="Buscar: pet, livros, 30%…" aria-label="Buscar cupons">
+  </div>
+
+  <main class="grid" id="grid">
+    <div class="empty">Carregando os cupons de hoje…</div>
+  </main>
+
+  <p class="note">A lista é atualizada todo dia de manhã. Cupons têm limite de uso e podem esgotar antes do prazo; alguns valem só no app ou para produtos com o selo do cupom. Confira o desconto no carrinho antes de pagar.</p>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const STORES={
+  aliexpress:{nome:"AliExpress",cor:"var(--ali)"},
+  mercadolivre:{nome:"Mercado Livre",cor:"var(--ml)"},
+  shopee:{nome:"Shopee",cor:"var(--shp)"},
+  amazon:{nome:"Amazon",cor:"var(--amz)"}
+};
+const ORDER=["aliexpress","mercadolivre","shopee","amazon"];
+let data=[], loja="todas", filtro="todos", q="";
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+try{const h=location.hash.slice(1);if(h&&(STORES[h]||h==="todas"))loja=h;else{const s=localStorage.getItem("loja");if(s)loja=s;}}catch(e){}
+
+function tabs(){
+  const counts={todas:data.length};ORDER.forEach(k=>counts[k]=data.filter(c=>c.loja===k).length);
+  const list=[["todas","Todas","var(--muted)"],...ORDER.map(k=>[k,STORES[k].nome,STORES[k].cor])];
+  $("#tabs").innerHTML=list.map(([k,n,c])=>`<button class="tab" role="tab" id="tab-${k}" data-k="${k}" aria-selected="${k===loja}"><span class="dot" style="background:${c}"></span>${n}<span class="n">${counts[k]}</span></button>`).join("");
+}
+function card(c){
+  const s=STORES[c.loja];const fr=c.tipo==="frete";
+  const code=c.codigo?`<div class="code"><output>${esc(c.codigo)}</output><button class="copy" data-code="${esc(c.codigo)}">Copiar</button></div>`:`<div class="nocode">Sem código: aplicado no app</div>`;
+  return `<article class="ticket"><div class="stub"><div class="val${fr?" frete":""}">${fr?"Frete<br>grátis":esc(c.valor)}</div><div class="lbl">${fr?"entrega":"off"}</div></div>
+  <div class="body"><div class="meta"><span class="dot" style="background:${s.cor}"></span>${s.nome}</div>
+  <p class="t">${esc(c.titulo)}</p><p class="r">${esc(c.regra)}</p>${code}
+  <div class="foot"><span>Validade: ${esc(c.validade)}</span><span>via ${esc(c.fonte)}</span></div></div></article>`;
+}
+function render(){
+  tabs();
+  const term=q.trim().toLowerCase();
+  const vis=data.filter(c=>(loja==="todas"||c.loja===loja)&&(filtro==="todos"||c.tipo===filtro)&&(!term||[c.titulo,c.regra,c.codigo,c.valor].join(" ").toLowerCase().includes(term)));
+  if(!vis.length){$("#grid").innerHTML=`<div class="empty">Nenhum cupom com esse filtro agora. Tente outra loja ou limpe a busca.</div>`;return;}
+  const lojas=loja==="todas"?ORDER:[loja];
+  $("#grid").innerHTML=lojas.map(k=>{const its=vis.filter(c=>c.loja===k);if(!its.length)return"";
+    return (loja==="todas"?`<h2 class="store-h"><span class="dot" style="background:${STORES[k].cor}"></span>${STORES[k].nome}</h2>`:"")+its.map(card).join("");}).join("");
+}
+let tt;function toast(m){const t=$("#toast");t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,1800);}
+document.addEventListener("click",e=>{
+  const tb=e.target.closest(".tab");if(tb){loja=tb.dataset.k;try{localStorage.setItem("loja",loja)}catch(_){};render();return;}
+  const ch=e.target.closest(".chip");if(ch){filtro=ch.dataset.f;document.querySelectorAll(".chip").forEach(b=>b.setAttribute("aria-pressed",b===ch));render();return;}
+  const cp=e.target.closest(".copy");if(cp){const code=cp.dataset.code;
+    const ok=()=>{cp.textContent="Copiado";cp.classList.add("done");toast(code+" copiado");setTimeout(()=>{cp.textContent="Copiar";cp.classList.remove("done")},2000)};
+    const fb=()=>{const o=cp.previousElementSibling;const r=document.createRange();r.selectNodeContents(o);const s=getSelection();s.removeAllRanges();s.addRange(r);toast("Código selecionado: copie com Ctrl+C")};
+    try{navigator.clipboard.writeText(code).then(ok,fb)}catch(_){fb()}}
+});
+$("#q").addEventListener("input",e=>{q=e.target.value;render()});
+fetch("coupons.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(j=>{
+  data=(j.cupons||[]).filter(c=>STORES[c.loja]);
+  const d=new Date(j.atualizado);
+  $("#upd").textContent=isNaN(d)?"Atualizado hoje":"Atualizado "+d.toLocaleDateString("pt-BR",{day:"2-digit",month:"short"})+", "+d.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+  if(loja!=="todas"&&!STORES[loja])loja="todas";
+  render();
+}).catch(()=>{$("#upd").textContent="Sem conexão";$("#grid").innerHTML=`<div class="empty">Não consegui carregar a lista de cupons. Recarregue a página em instantes.</div>`;});
+</script>
+</body>
+</html>
